@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userValidation = require('./userValidation');
 const User = require('./models/User');
+const bcrypt = require('bcryptjs')
 // /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('main/welcome', { title: 'Express' });
@@ -55,7 +56,7 @@ else {
 })
 
 
-router.post('/register',userValidation, createUserCart)
+// router.post('/register',userValidation, createUserCart)
 
 
 module.exports = router;

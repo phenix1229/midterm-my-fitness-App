@@ -19,7 +19,6 @@ router.get('/login', (req,res)=>{
 })
 
 
-
 // get register page
 router.get('/register', (req,res)=>{
   return res.render('main/register')
@@ -56,7 +55,7 @@ else {
 })
 
 
-// router.post('/register',userValidation, createUserCart)
+router.post('/register',userValidation)
 
 
 module.exports = router;

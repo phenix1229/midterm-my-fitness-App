@@ -37,7 +37,7 @@ module.exports = {
                     .status(400)
                     .json({confirmation:false, message:err})
                 } else {
-                    res.redirect('/users/bmi');
+                    res.redirect('/auth/bmi');
                     next();
                 }
             })

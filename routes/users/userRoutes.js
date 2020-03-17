@@ -11,9 +11,7 @@ require('../../lib/passport')
 router.get('/', (req,res)=>{
   return res.render('main/welcome')
 })
-router.get('/bmi', (req,res)=>{
-  return res.render('main/bmi')
-})
+
 
 router.get('/login', (req,res)=>{
   return res.render('main/login')

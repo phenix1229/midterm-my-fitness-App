@@ -8,6 +8,7 @@ const session= require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users/userRoutes');
+const calculationRouter = require('./routes/calculations/calculationRoutes');
 const passport =require('passport');
 const flash = require('connect-flash');
 const app = express();
@@ -67,6 +68,8 @@ app.use((req, res, next)=>{
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', calculationRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

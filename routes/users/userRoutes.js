@@ -2,60 +2,71 @@ const express = require('express');
 const router = express.Router();
 const userValidation = require('./userValidation');
 const User = require('./models/User');
-const bcrypt = require('bcryptjs')
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('main/welcome', { title: 'Express' });
-// });
+const passport=require('passport');
+const userController =require('./controllers/userController')
+const {register} = require('./controllers/userController')
+require('../../lib/passport')
+// const userController = require('./controllers/userController')
 
-// welcome page
 router.get('/', (req,res)=>{
   return res.render('main/welcome')
 })
+router.get('/bmi', (req,res)=>{
+  return res.render('main/bmi')
+})
 
-// get login page 
 router.get('/login', (req,res)=>{
   return res.render('main/login')
 })
 
+router.post('/login', 
+  passport.authenticate('local-login',{
+  successRedirect: '/users/bmi',
+  failureRedirect:'/users/login',
+  failureFlash:true
+}))
 
-// get register page
 router.get('/register', (req,res)=>{
   return res.render('main/register')
 })
 
+router.get('/', (req,res)=>{
+  //empty object allows us to fill with users
+  User.find({})
+  .then(users=>{
+    return res.status(200).json({message:'success', users})
+  }).catch(err=> res.status(500).json({message:'Server error'}))
+});
 
-router.post('/register', (req,res,next)=>{
-
-User.findOne({email:req.body.email})
-.then((user)=>{
-  if(user) return console.log('User exists');
-  
-else {
-  
-  const newUser = new User();
-  // const salt= bcrypt.genSaltSync(10);
-  // const hash = bcrypt.hashSync(req.body.password,salt)
-
-  newUser.profile.name = req.body.password
-  newUser.email = req.body.email;
-  newUser.password = req.body.password;
+router.post('/register',userValidation, register)
 
 
-  newUser.save()
+router.put('/update-profile', (req,res)=>{
+  userController.updateProfile(req.body,req.user._id)
   .then((user)=> {
-    if(user){
-      res.status(200).json({message:'success', user})
-    }
-  }).catch(err=>{
-    return next(err);
+    return res.redirect('/api/users/profile')
+  }).catch((err)=> {
+    console.log(err)
+    return res.redirect('/api/users/update-profile')
   })
-}
-})
-})
+  });
 
 
-router.post('/register',userValidation)
+  router.get('/update-profile', (req,res)=>{
+    if(req.isAuthenticated()){
+    return res.render('auth/update-profile')
+    }
+    return res.redirect('/')
+  })
 
 
+  //update password
+  router.put('/update-password',(req,res)=>{
+    userController.updatePassword(req.body, req.user._id)
+    .then((user)=>{
+      return res.redirect('/api/users/profile');
+    }).catch(err=>{
+      return res.redirect('/api/users/update-profile')
+    });
+  });
 module.exports = router;

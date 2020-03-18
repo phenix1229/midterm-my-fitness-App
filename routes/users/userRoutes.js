@@ -4,12 +4,12 @@ const userValidation = require('./userValidation');
 const User = require('./models/User');
 const passport=require('passport');
 const userController =require('./controllers/userController')
-const {register} = require('./controllers/userController')
-
-const {loginGet} = require('./controllers/userController');
-const {registerGet} = require('./controllers/userController');
-const {mainGet} = require('./controllers/userController');
-const {getUsers} = require('./controllers/userController');
+const {register,
+        loginGet,
+        registerGet,
+        mainGet,
+        getUsers
+      } = require('./controllers/userController')
 require('../../lib/passport')
 // const userController = require('./controllers/userController')
 
@@ -42,19 +42,21 @@ router.put('/update-profile', (req,res)=>{
   })
   });
 
-  router.get('/update-profile', (req,res)=>{
+router.get('/update-profile', (req,res)=>{
     if(req.isAuthenticated()){
     return res.render('auth/update-profile')
     }
     return res.redirect('/')
-  })
+});
 
-  router.put('/update-password',(req,res)=>{
+router.put('/update-password',(req,res)=>{
     userController.updatePassword(req.body, req.user._id)
     .then((user)=>{
       return res.redirect('/api/users/profile');
     }).catch(err=>{
       return res.redirect('/api/users/update-profile')
     });
-  });
+});
+
+
 module.exports = router;

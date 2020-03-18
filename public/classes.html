@@ -83,7 +83,7 @@
                                 <h2>Register Now</h2>
                                 <p>The First 7 Day Trial Is Completely Free With The Teacher</p>
                             </div>
-                            <form action="#" class="register-form">
+                            <form action="#" role="form" method="POST" action="/users/register" class="register-form">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="name">First Name</label>
@@ -101,8 +101,12 @@
                                         <label for="mobile">Mobile No*</label>
                                         <input type="text" id="mobile">
                                     </div>
+                                    <div class="col-lg-6">
+                                            <label for="password">Password</label>
+                                            <input type="password" >
+                                        </div>
                                 </div>
-                                <button type="submit" class="register-btn">Get Started</button>
+                                <button type="submit" value="register" class="register-btn">Get Started</button>
                             </form>
                         </div>
                     </div>

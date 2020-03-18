@@ -9,6 +9,9 @@ router.get('/bmi', (req,res)=>{
     return res.render('main/bmi')
     });
 
+router.get('/track', (req,res)=>{
+    return res.render('main/track')
+    })
 
 
 

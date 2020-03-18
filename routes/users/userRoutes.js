@@ -5,17 +5,22 @@ const User = require('./models/User');
 const passport=require('passport');
 const userController =require('./controllers/userController')
 const {register} = require('./controllers/userController')
+
+const {loginGet} = require('./controllers/userController');
+const {registerGet} = require('./controllers/userController');
+const {mainGet} = require('./controllers/userController')
 require('../../lib/passport')
 // const userController = require('./controllers/userController')
 
-router.get('/', (req,res)=>{
-  return res.render('main/welcome')
-})
+router.get('/', mainGet)
 
 
-router.get('/login', (req,res)=>{
-  return res.render('main/login')
-})
+
+router.get('/login', loginGet)
+
+// (req,res)=>{
+//   return res.render('main/login')
+// })
 
 router.post('/login', 
   passport.authenticate('local-login',{
@@ -24,9 +29,11 @@ router.post('/login',
   failureFlash:true
 }))
 
-router.get('/register', (req,res)=>{
-  return res.render('main/register')
-})
+router.get('/register', registerGet)
+
+// (req,res)=>{
+//   return res.render('main/register')
+// }
 
 router.get('/', (req,res)=>{
   //empty object allows us to fill with users

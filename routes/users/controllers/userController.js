@@ -98,5 +98,14 @@ module.exports = {
             reject(err);
           })
         })
+      },
+      loginGet: (req,res)=> {
+        return res.render('main/login')
+      },
+      registerGet : (req,res)=>{
+        return res.render('main/register')
+      },
+      mainGet: (req,res)=>{
+        return res.render('main/welcome')
       }
 }

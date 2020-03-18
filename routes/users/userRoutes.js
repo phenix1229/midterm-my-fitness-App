@@ -19,7 +19,7 @@ router.get('/login', loginGet);
 
 router.post('/login', 
   passport.authenticate('local-login',{
-  successRedirect: '/users/bmi',
+  successRedirect: '/auth/bmi',
   failureRedirect:'/users/login',
   failureFlash:true
 }))

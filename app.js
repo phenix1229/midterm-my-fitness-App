@@ -6,13 +6,17 @@ const logger = require('morgan');
 const mongoose=require('mongoose');
 const session= require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users/userRoutes');
-const calculationRouter = require('./routes/calculations/calculationRoutes');
 const passport =require('passport');
 const methodOverride=require('method-override');
 const flash = require('connect-flash');
 const app = express();
+
+// const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users/userRoutes');
+const calculationRouter = require('./routes/calculations/calculationRoutes');
+const indexRouter = require('./routes/index/indexRoutes');
+
+
 require('./lib/passport')
 require('dotenv').config()
 

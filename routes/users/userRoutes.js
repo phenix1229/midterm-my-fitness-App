@@ -8,19 +8,14 @@ const {register} = require('./controllers/userController')
 
 const {loginGet} = require('./controllers/userController');
 const {registerGet} = require('./controllers/userController');
-const {mainGet} = require('./controllers/userController')
+const {mainGet} = require('./controllers/userController');
+const {getUsers} = require('./controllers/userController');
 require('../../lib/passport')
 // const userController = require('./controllers/userController')
 
-router.get('/', mainGet)
+router.get('/', mainGet);
 
-
-
-router.get('/login', loginGet)
-
-// (req,res)=>{
-//   return res.render('main/login')
-// })
+router.get('/login', loginGet);
 
 router.post('/login', 
   passport.authenticate('local-login',{
@@ -29,21 +24,12 @@ router.post('/login',
   failureFlash:true
 }))
 
-router.get('/register', registerGet)
+router.get('/register', registerGet);
 
-// (req,res)=>{
-//   return res.render('main/register')
-// }
+router.get('/getUsers', getUsers);
 
-router.get('/', (req,res)=>{
-  //empty object allows us to fill with users
-  User.find({})
-  .then(users=>{
-    return res.status(200).json({message:'success', users})
-  }).catch(err=> res.status(500).json({message:'Server error'}))
-});
 
-router.post('/register',userValidation, register)
+router.post('/register',userValidation, register);
 
 
 router.put('/update-profile', (req,res)=>{
@@ -56,7 +42,6 @@ router.put('/update-profile', (req,res)=>{
   })
   });
 
-
   router.get('/update-profile', (req,res)=>{
     if(req.isAuthenticated()){
     return res.render('auth/update-profile')
@@ -64,8 +49,6 @@ router.put('/update-profile', (req,res)=>{
     return res.redirect('/')
   })
 
-
-  //update password
   router.put('/update-password',(req,res)=>{
     userController.updatePassword(req.body, req.user._id)
     .then((user)=>{

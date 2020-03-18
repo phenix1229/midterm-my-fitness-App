@@ -107,5 +107,12 @@ module.exports = {
       },
       mainGet: (req,res)=>{
         return res.render('main/welcome')
-      }
+      },
+      getUsers : (req,res)=>{
+        User.find({})
+        .then(users=>{
+          return res.status(200).json({message:'success', users})
+        }).catch(err=> res.status(500).json({message:'Server error'}))
+      },
+
 }

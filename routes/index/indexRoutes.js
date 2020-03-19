@@ -15,5 +15,17 @@ router.get('/home', (req,res)=>{
     return res.render('main/home')
 });
 
+router.get('/', (req,res)=>{
+    return res.render('main/welcome')
+});
+
+router.get('/home', (req,res)=>{
+    return res.render('main/home')
+});
+
+router.get('/about', (req,res)=>{
+    return res.render('main/about')
+});
+
 
 module.exports= router

@@ -105,9 +105,9 @@ module.exports = {
       registerGet : (req,res)=>{
         return res.render('main/register')
       },
-      mainGet: (req,res)=>{
-        return res.render('main/welcome')
-      },
+    //   mainGet: (req,res)=>{
+    //     return res.render('main/welcome')
+    //   },
       getUsers : (req,res)=>{
         User.find({})
         .then(users=>{

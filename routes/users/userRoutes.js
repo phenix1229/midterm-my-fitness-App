@@ -13,7 +13,7 @@ const {register,
 require('../../lib/passport')
 // const userController = require('./controllers/userController')
 
-router.get('/', mainGet);
+// router.get('/', mainGet);
 
 router.get('/login', loginGet);
 

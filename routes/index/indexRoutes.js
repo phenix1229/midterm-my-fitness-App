@@ -27,8 +27,8 @@ router.get('/about', (req,res)=>{
     return res.render('main/about')
 });
 
-router.get('/about', (req,res)=>{
-    return res.render('main/about')
+router.get('/blog', (req,res)=>{
+    return res.render('main/blog')
 });
 
 

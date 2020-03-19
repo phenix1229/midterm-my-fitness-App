@@ -27,5 +27,9 @@ router.get('/about', (req,res)=>{
     return res.render('main/about')
 });
 
+router.get('/about', (req,res)=>{
+    return res.render('main/about')
+});
+
 
 module.exports= router

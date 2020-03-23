@@ -14,7 +14,7 @@ router.get('/track', (req,res)=>{
     })
 
 router.get('/bmi', (req,res)=>{
-        return res.render('main/bmi')
+        return res.render('main/bmi', {bmi:null})
 })
 // router.get('/bmi', (req,res,next)=>{
 //         Bmi.find({})
@@ -28,7 +28,23 @@ router.get('/bmi', (req,res)=>{
 //         )
 // })
 
-// router.post('/bmi', )
+router.post('/bmi', (req,res,next)=>{
+        // Bmi.findOne({})
+        // .then((item) =>{
+        //     if(!item){
+                newBmi = new Bmi();
+                newBmi.height = req.body.height;
+                newBmi.weight = req.body.weight;
+                newBmi.save();
+            // }
+            const bmi = ((req.body.weight/(req.body.height*req.body.height))* 703).toFixed(2)
+            console.log(bmi)
+            // if(err) return next(err)
+            
+            return res.render('main/bmi', {bmi})
+        }
+        )
+// })
 
 
 
